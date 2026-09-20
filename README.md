@@ -2,7 +2,7 @@
 
 The website for DEMOCRESP, the ERC Starting Grant project led by Fabian Habersack at the University of Innsbruck. Intended domain: **democresp.eu**.
 
-[View the complete desktop preview](.github/website-preview.jpg)
+[View the current website](https://democresp.eu/)
 
 ## Publish on GitHub Pages
 
@@ -33,11 +33,11 @@ To preview on the default GitHub Pages URL before connecting the domain, tempora
 
 - **Text, people and outputs:** `docs/index.html`.
 - **Colours, typography and layout:** `docs/styles.css`; core colours are declared at the top.
-- **Mobile menu and active navigation:** `docs/site.js`.
+- **Mobile menu, active navigation and cursor visibility:** `docs/site.js`.
 - **Contact and privacy information:** `docs/site-information.html`.
 - **Logos and self-hosted fonts:** `docs/assets/`.
 
-Edit the HTML directly in GitHub, commit to `main`, and GitHub Pages will republish once enabled. The site works without JavaScript; JavaScript enhances mobile navigation and section highlighting. Native disclosure elements provide the framework and country-list interactions.
+Edit the HTML directly in GitHub, commit to `main`, and GitHub Pages will republish once enabled. The site works without JavaScript; JavaScript enhances mobile navigation, section highlighting and cursor visibility. Native disclosure elements provide the framework interactions.
 
 ## Local preview
 
@@ -68,8 +68,10 @@ The `site-information.html` page describes this site's technical behaviour. Befo
 
 ## Design
 
-The design uses a cobalt-and-mint relationship diagram, offset panels, large editorial typography, and four distinct framework colours. It is responsive, supports keyboard navigation and reduced motion, and loads its assets locally. There are no analytics, cookies, sign-up forms or external font requests. The tentative project logo is used modestly in the footer alongside the EU and ERC funding acknowledgement.
+The design uses an open cobalt-and-teal dialogue composition, medium-weight hero typography, Lucide line icons, and four distinct framework colours. A small cursor halo supplements the native pointer on devices with a mouse or trackpad; it is disabled for reduced motion, touch-only devices and forced-colour modes. It is responsive, supports keyboard navigation and reduced motion, and loads its assets locally. There are no analytics, cookies, sign-up forms or external font requests. The tentative project logo is used modestly in the footer alongside the EU and ERC funding acknowledgement.
 
 ## Rights
 
 Site code is covered by the repository's existing MIT licence. Supplied logos retain their respective ownership and are excluded from that software licence. Manrope and Newsreader are distributed under the SIL Open Font License; their licence texts are included with the font files. Font sources: [Google Fonts / Manrope](https://github.com/google/fonts/tree/main/ofl/manrope) and [Google Fonts / Newsreader](https://github.com/google/fonts/tree/main/ofl/newsreader).
+
+The four dimension icons are adapted from [Lucide](https://lucide.dev/) and self-hosted under `docs/assets/icons/`; the upstream licence is included there.

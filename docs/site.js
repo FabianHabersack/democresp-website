@@ -45,3 +45,66 @@ if ('IntersectionObserver' in window) {
   }, { rootMargin: '-15% 0px -65% 0px' });
   sections.forEach(section => observer.observe(section));
 }
+
+// Keep the native cursor and supplement it only for desktop mouse/trackpad use.
+const cursorPreference = matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+let removeCursorHalo = () => {};
+
+const syncCursorHalo = () => {
+  removeCursorHalo();
+  removeCursorHalo = () => {};
+  if (!cursorPreference.matches) return;
+
+  const halo = document.createElement('div');
+  halo.className = 'cursor-halo';
+  halo.setAttribute('aria-hidden', 'true');
+  document.body.append(halo);
+
+  let frame = 0;
+  let x = 0;
+  let y = 0;
+  let overLink = false;
+  let overDark = false;
+
+  const hide = () => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    halo.classList.remove('is-visible');
+  };
+
+  const move = event => {
+    if (event.pointerType !== 'mouse') { hide(); return; }
+    x = event.clientX;
+    y = event.clientY;
+    const target = event.target;
+    overLink = Boolean(target.closest('a, button, summary, input, select, textarea, [role="button"]'));
+    overDark = Boolean(target.closest('.framework, .contact-section')) && !target.closest('.dimension');
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      halo.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      halo.classList.toggle('is-link', overLink);
+      halo.classList.toggle('on-dark', overDark);
+      halo.classList.add('is-visible');
+      frame = 0;
+    });
+  };
+
+  document.addEventListener('pointermove', move, { passive: true });
+  document.documentElement.addEventListener('pointerleave', hide);
+  document.addEventListener('keydown', hide);
+  document.addEventListener('scroll', hide, { passive: true, capture: true });
+  window.addEventListener('blur', hide);
+
+  removeCursorHalo = () => {
+    hide();
+    halo.remove();
+    document.removeEventListener('pointermove', move);
+    document.documentElement.removeEventListener('pointerleave', hide);
+    document.removeEventListener('keydown', hide);
+    document.removeEventListener('scroll', hide, true);
+    window.removeEventListener('blur', hide);
+  };
+};
+
+cursorPreference.addEventListener('change', syncCursorHalo);
+syncCursorHalo();
