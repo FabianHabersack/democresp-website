@@ -1,0 +1,11 @@
+{
+  "name": "democresp-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite docs --config vite.config.js",
+    "build": "node scripts/validate.mjs"
+  },
+  "devDependencies": { "vite": "8.0.13" }
+}
