@@ -2,3 +2,14 @@ node_modules/
 .sites-runtime/
 .DS_Store
 *.log
+
+# Private project documents and original design inputs
+[Dd][Oo][Aa]*.[Pp][Dd][Ff]
+DESIGN.md
+DESIGN(*).md
+code.html
+code(*).html
+screen2.png
+screen2(*).png
+/source-materials/
+/private/
