@@ -29,7 +29,9 @@ for (const [, asset] of css.matchAll(/url\(['"]?([^'"\)]+)['"]?\)/g)) {
   if (!existsSync(join(root, asset))) errors.push(`styles.css: missing ${asset}`);
   checked++;
 }
-execFileSync(process.execPath, ['--check', join(root, 'site.js')], { stdio: 'inherit' });
+for (const script of readdirSync(root).filter(file => file.endsWith('.js'))) {
+  execFileSync(process.execPath, ['--check', join(root, script)], { stdio: 'inherit' });
+}
 if (readFileSync(join(root, 'CNAME'), 'utf8').trim() !== 'democresp.eu') errors.push('Incorrect custom domain');
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
 console.log(`Validated ${htmlFiles.length} HTML pages, ${checked} local references, JavaScript syntax and custom domain. Static site ready in docs/.`);

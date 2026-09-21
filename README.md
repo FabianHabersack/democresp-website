@@ -18,17 +18,24 @@ Views and opinions expressed are however those of the author(s) only and do not 
 
 ## Website source
 
-The website is built with HTML, CSS and a small amount of JavaScript, and is hosted on GitHub Pages at **[democresp.eu](https://democresp.eu/)**. Fonts and visual assets are served locally. The site includes responsive layouts, keyboard navigation and reduced-motion support, without analytics or tracking cookies.
+The website is built with HTML, CSS and a small amount of JavaScript, and is hosted on GitHub Pages at **[democresp.eu](https://democresp.eu/)**. Fonts and visual assets are served locally. The site includes responsive layouts, keyboard navigation and reduced-motion support. GoatCounter provides traffic statistics without tracking cookies.
 
 | Location | Contents |
 | --- | --- |
 | `docs/index.html` | Project overview, research programme, team, outputs and contact |
 | `docs/styles.css` | Layout, typography and visual design |
 | `docs/site.js` | Navigation and interaction enhancements |
+| `docs/analytics.js` | GoatCounter integration and browser privacy preferences |
 | `docs/site-information.html` | Publisher and privacy information |
 | `docs/assets/` | Logos, fonts and icons |
 
 GitHub Pages publishes the `docs/` directory from the `main` branch. The website requires no production build step.
+
+## Analytics
+
+[GoatCounter](https://www.goatcounter.com/) records visits to the homepage and site-information page. The integration runs only on `democresp.eu` and `www.democresp.eu`, and respects browser Do Not Track and Global Privacy Control signals. Local previews and other domains do not load the analytics script. The account uses GoatCounter's standard hosted endpoint, which requires no API key in the website code.
+
+For details about data processing and browser exclusion, see the website's [privacy information](https://democresp.eu/site-information.html).
 
 ## Local development
 
