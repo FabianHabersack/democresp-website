@@ -74,3 +74,14 @@
 .pi-heading h3{font-size:clamp(1.9rem,3.2vw,2.8rem);margin:10px 0}
 @media(max-width:900px) and (min-width:721px){.pi-heading{grid-template-columns:88px minmax(0,1fr);gap:18px}.pi-portrait{width:88px;height:110px}}
 @media(max-width:480px){.pi-heading{grid-template-columns:88px minmax(0,1fr);gap:18px}.pi-portrait{width:88px;height:110px}}
+
+/* Project facts share a baseline while leaving room for the research design. */
+.project-facts>div{flex-direction:column;align-items:flex-start;gap:12px;min-width:0}
+.project-facts .fact-number{display:block;min-height:56px;font-size:3.5rem;white-space:nowrap}
+.project-facts .fact-scope{font-size:2.15rem;line-height:1.1;white-space:normal;padding-top:9px}
+.project-facts .fact-erc{font-size:2.8rem;padding-top:8px}
+.fact-unit{font-size:.65em;letter-spacing:0;margin-left:2px}
+.fact-count{display:inline-block;width:1.05em;text-align:right;font-variant-numeric:tabular-nums}
+.fact-count[data-count-decimals="1"]{width:1.25em}
+@media(max-width:1150px){.project-facts .fact-scope{font-size:1.85rem;padding-top:13px}}
+@media(max-width:720px){.project-facts .fact-number{font-size:2.8rem;min-height:55px}.project-facts .fact-scope{font-size:1.55rem;padding-top:0}.project-facts .fact-erc{font-size:2.4rem;padding-top:5px}}

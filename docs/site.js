@@ -108,3 +108,50 @@ const syncCursorHalo = () => {
 
 cursorPreference.addEventListener('change', syncCursorHalo);
 syncCursorHalo();
+
+// Count up once when the project facts enter view; keep the final values in HTML.
+(() => {
+  const facts = document.querySelector('.project-facts');
+  const counters = [...document.querySelectorAll('[data-count-to]')].map(element => ({
+    element,
+    target: Number(element.dataset.countTo),
+    decimals: Number(element.dataset.countDecimals || 0),
+    finalText: element.textContent
+  }));
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  if (!facts || !counters.length || reducedMotion.matches || !('IntersectionObserver' in window)) return;
+
+  let frame = 0;
+  let started = false;
+  const finish = () => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    started = true;
+    counters.forEach(({ element, finalText }) => { element.textContent = finalText; });
+    observer.disconnect();
+    reducedMotion.removeEventListener('change', onMotionChange);
+    window.removeEventListener('beforeprint', finish);
+  };
+  const onMotionChange = () => { if (reducedMotion.matches) finish(); };
+  const observer = new IntersectionObserver(entries => {
+    if (started || !entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.4)) return;
+    started = true;
+    observer.disconnect();
+    const start = performance.now();
+    const animate = now => {
+      if (reducedMotion.matches) { finish(); return; }
+      const progress = Math.min((now - start) / 1300, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      counters.forEach(({ element, target, decimals }) => {
+        element.textContent = (target * eased).toFixed(decimals);
+      });
+      if (progress < 1) frame = requestAnimationFrame(animate);
+      else finish();
+    };
+    frame = requestAnimationFrame(animate);
+  }, { threshold: 0.4 });
+
+  reducedMotion.addEventListener('change', onMotionChange);
+  window.addEventListener('beforeprint', finish, { once: true });
+  observer.observe(facts);
+})();
